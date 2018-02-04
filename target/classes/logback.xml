@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--<property name="LOG_HOME" value="C:/logs" />-->
+    <property name="CHARSET" value="UTF-8" />
+    <property name="PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss}]  [%-5level] [%logger{50}] - %msg%n" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                [%d{yyyy-MM-dd HH:mm:ss}][ %-5level] [%logger{36}] - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${user.dir}/myLog.log</file>
+        <encoder>
+            <pattern>${PATTERN}</pattern>
+            <charset>${CHARSET}</charset>
+        </encoder>
+    </appender>
+
+    <logger name="com" level="debug" additivity="false" >
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="org.springframework" level="debug" additivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
+
+    <root level="error">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>
